@@ -1,20 +1,16 @@
-import { NextFunction, Request, Response } from "express";
+const Express = require("express");
 
-const response500 = (
-  key: String = "",
-  res: Response,
-  custom_message: String | null = null
-) => {
+const response500 = (item = "", res, custom_message = null) => {
   res.statusCode = 500;
   res.setHeader("Content-Type", "application/json");
   return res.json({
     error: custom_message
       ? custom_message
-      : `We failed to add this ${key} into the system.`,
+      : `We failed to add this ${item} into the system.`,
   });
 };
 
-const response401 = (error: Object, res: Response) => {
+const response401 = (error, res) => {
   res.statusCode = 401;
   res.setHeader("Content-Type", "application/json");
   return res.json({
@@ -22,30 +18,22 @@ const response401 = (error: Object, res: Response) => {
   });
 };
 
-const response404 = (
-  key: String = "",
-  res: Response,
-  custom_message: String | null = null
-) => {
+const response404 = (item, res, custom_message = null) => {
   res.statusCode = 404;
   res.setHeader("Content-Type", "application/json");
   return res.json({
     error: custom_message
       ? custom_message
-      : `This ${key} is not found in the system.`,
+      : `This ${item} is not found in the system.`,
   });
 };
 
-const response403 = (
-  operation: String = "",
-  route: String = "",
-  res: Response
-) => {
+const response403 = (operation, route, res) => {
   res.statusCode = 403;
   return res.end(`${operation} operation not supported on ${route}`);
 };
 
-const response200 = (data: Object, res: Response) => {
+const response200 = (data, res) => {
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   return res.json(data);
