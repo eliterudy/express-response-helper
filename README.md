@@ -14,6 +14,6 @@ To run project locally.
 ### Installation
 ```
 npm i --save
-npm i --save-dev typescript
+npm start
 ```
 
